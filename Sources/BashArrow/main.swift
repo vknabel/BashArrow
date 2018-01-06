@@ -4,21 +4,17 @@ import ArrowKit
 struct BashArrow: Arrow {
     let arrow: String
     let command: String
-    let printCommandBeforeExecution = false
+    let printCommandBeforeExecution: Bool?
     let help: String?
-    let workingDirectory = {
-        FileManager
-            .defaultManager
-            .currentDirectoryPath
-    }()
+    let workingDirectory: String?
 
     func fire(archerfile: Archerfile, arguments: [String]) throws {
         let launchPath = "/usr/bin/env"
         let process = Process()
         process.launchPath = launchPath
-        process.currentDirectoryPath = workingDirectory
+        process.currentDirectoryPath = targetWorkingDirectory
         let commandWithEscapedArguments = command + " " + escaped(arguments)
-        if printCommandBeforeExecution {
+        if printCommandBeforeExecution ?? false {
             print("🏹\t\(workingDirectoryHint) $ \(commandWithEscapedArguments)")
         }
         process.arguments = ["bash", "-c", command + " " + escaped(arguments)]
@@ -42,8 +38,12 @@ struct BashArrow: Arrow {
             .joined(separator: " ")
     }
 
+    var targetWorkingDirectory: String {
+        return workingDirectory ?? FileManager.default.currentDirectoryPath
+    }
+
     var workingDirectoryHint: String {
-        return workingDirectory.split(separator: "/").last.map(String.init) ?? workingDirectory
+        return targetWorkingDirectory.split(separator: "/").last.map(String.init) ?? targetWorkingDirectory
     }
 }
 
