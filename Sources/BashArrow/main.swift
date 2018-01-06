@@ -15,12 +15,15 @@ struct BashArrow: Arrow {
         process.currentDirectoryPath = targetWorkingDirectory
         let commandWithEscapedArguments = command + " " + escaped(arguments)
         if printCommandBeforeExecution ?? false {
-            print("🏹\t\(workingDirectoryHint) $ \(commandWithEscapedArguments)")
+            print("🏹  \(workingDirectoryHint) $ \(commandWithEscapedArguments)")
         }
         process.arguments = ["bash", "-c", command + " " + escaped(arguments)]
         process.launch()
         process.waitUntilExit()
         if process.terminationStatus != 0 {
+            if !(printCommandBeforeExecution ?? false) {
+                print("🏹  \(workingDirectoryHint) $ \(commandWithEscapedArguments)")
+            }
             throw NSError(domain: "BashArrow", code: Int(process.terminationStatus))
         }
     }
