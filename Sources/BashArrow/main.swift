@@ -19,7 +19,7 @@ struct BashArrow: Arrow {
         process.currentDirectoryPath = workingDirectory
         let commandWithEscapedArguments = command + " " + escaped(arguments)
         if printCommandBeforeExecution {
-            print("🏹 \(workingDirectoryHint) $ \(commandWithEscapedArguments)")
+            print("🏹\t\(workingDirectoryHint) $ \(commandWithEscapedArguments)")
         }
         process.arguments = ["bash", "-c", command + " " + escaped(arguments)]
         process.launch()
