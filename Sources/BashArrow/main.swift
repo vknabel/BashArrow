@@ -3,9 +3,9 @@ import ArrowKit
 
 struct BashArrow: Arrow {
     let arrow: String
+    let help: String?
     let command: String
     let printCommandBeforeExecution: Bool?
-    let help: String?
     let workingDirectory: String?
 
     func fire(archerfile: Archerfile, arguments: [String]) throws {
