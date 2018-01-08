@@ -52,7 +52,8 @@
             "arrow": "vknabel/ArcheryArrow",
             "run": [
                 "readme",
-                "format"
+                "format",
+                "docs"
             ],
             "scripts": {
                 "readme": {
@@ -63,7 +64,7 @@
                 },
                 "docs": {
                     "arrow": "vknabel/BashArrow",
-                    "command": "if which jazzy >/dev/null; then jazzy; fi"
+                    "command": "if which jazzy >/dev/null; then jazzy; else echo Skip: Jazzy not available; fi"
                 }
             }
         }
