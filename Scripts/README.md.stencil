@@ -5,18 +5,16 @@ Run bash scripts out of your Archerfile.
 {% endblock %}
 
 {% block example %}
-Run bash scripts out of your Archerfile. For more information about Archery itself head to [{{archery.github}}](https://github.com/{{archery.github}}).
-
 ```json
 {
-	"name": "SupercoolProject",
-	"version": "1.0.0",
-	"scripts": {
-		"greet": {
-			"arrow": "{{github}}",
-			"command": "echo Hello"
-      }
-  }
+    "name": "SupercoolProject",
+    "version": "1.0.0",
+    "scripts": {
+        "greet": {
+            "arrow": "{{github}}",
+            "command": "echo Hello"
+        }
+    }
 }
 ```
 
