@@ -1,5 +1,5 @@
-import Foundation
 import ArrowKit
+import Foundation
 
 struct BashArrow: Arrow {
     let arrow: String
@@ -8,7 +8,7 @@ struct BashArrow: Arrow {
     let printCommandBeforeExecution: Bool?
     let workingDirectory: String?
 
-    func fire(archerfile: Archerfile, arguments: [String]) throws {
+    func fire(archerfile _: Archerfile, arguments: [String]) throws {
         let launchPath = "/usr/bin/env"
         let process = Process()
         process.launchPath = launchPath
