@@ -60,6 +60,10 @@
                     "template": "README.md.stencil",
                     "destination": "README.md",
                     "searchPaths": ["Scripts"]
+                },
+                "docs": {
+                    "arrow": "vknabel/BashArrow",
+                    "command": "if which jazzy >/dev/null; then jazzy; fi"
                 }
             }
         }

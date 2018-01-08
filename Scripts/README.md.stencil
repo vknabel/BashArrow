@@ -1,5 +1,10 @@
-# 🏹 {{name}}
+{% extends "BASE_README.md.stencil" %}
 
+{% block subtitle %}
+Run bash scripts out of your Archerfile.
+{% endblock %}
+
+{% block example %}
 Run bash scripts out of your Archerfile. For more information about Archery itself head to [{{archery.github}}](https://github.com/{{archery.github}}).
 
 ```json
@@ -22,16 +27,4 @@ Hello
 $ archery greet World
 Hello World
 ```
-
-## Available Options
-
-| Name | Type | Default |
-|------|------|---------|{% for option in arrowOptions %}
-| {{option.name}} | {{option.type}} | {{option.default}} |{% endfor %}
-
-## Contributors
-{% for user in contributors %}* {{user.name}}, [@{{user.github}}](https://github.com/{{user.github}}){% if user.email %}, {{user.email}}{% endif %}{% if user.twitter %}, [@{{user.twitter}}](https://twitter.com/{{user.twitter}}) on Twitter{% endif %}
-{% endfor %}
-
-## License
-Archery is available under the [MIT](https://github.com/vknabel/archery/master/LICENSE) license.
+{% endblock %}
