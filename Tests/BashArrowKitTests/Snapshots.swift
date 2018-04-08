@@ -19,7 +19,7 @@ extension XCTestCase {
     ) {
         let testName = "[" + String(describing: type(of: self)) + " " + test.dropLast(2) + "]"
         let snapshotsDir = FileManager.default.currentDirectoryPath
-            + "/Tests/BashArrowTests/snapshots"
+            + "/Tests/BashArrowKitTests/snapshots"
         let pinnedSnapshotPath = "\(snapshotsDir)/\(testName).xcsnapshot"
         let currentSnapshotPath = "\(snapshotsDir)/\(testName).xcsnapshot.out"
         let bash = BashArrow(

@@ -51,9 +51,22 @@ scripts:
     arrow: vknabel/ArcheryArrow
     run:
     - readme
+    - linux-main
     - format
     - docs
     scripts:
+      linux-main:
+        arrow: vknabel/MintArrow
+        package: krzysztofzablocki/Sourcery
+        packageVersion: 0.10.1
+        arguments:
+        - "--sources"
+        - Tests/
+        - "--templates"
+        - Scripts/LinuxMain.swift.stencil
+        - "--args"
+        - |-
+          testimports='@testable import BashArrowKitTests'
       readme:
         arrow: vknabel/StencilArrow
         template: README.md.stencil
