@@ -10,7 +10,15 @@ let package = Package(
     targets: [
         .target(
             name: "BashArrow",
+            dependencies: ["BashArrowKit"]
+        ),
+        .target(
+            name: "BashArrowKit",
             dependencies: ["ArrowKit"]
         ),
+        .testTarget(
+            name: "BashArrowKitTests",
+            dependencies: ["BashArrowKit"]
+        )
     ]
 )

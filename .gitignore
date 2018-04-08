@@ -6,3 +6,4 @@
 /.archery
 /.vscode
 /build
+/Tests/**/snapshots/*.out

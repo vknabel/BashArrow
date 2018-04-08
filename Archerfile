@@ -33,6 +33,23 @@
         }
     ],
     "scripts": {
+        "test": {
+            "arrow": "vknabel/BashArrow",
+            "command": "swift test"
+        },
+        "test-approve": {
+            "arrow": "vknabel/ArcheryArrow",
+            "run": [
+                "test-clear",
+                "test"
+            ],
+            "scripts": {
+                "test-clear": {
+                    "arrow": "vknabel/BashArrow",
+                    "command": "rm -rf Tests/**/snapshots"
+                }
+            }
+        },
         "clean": {
             "arrow": "vknabel/BashArrow",
             "command": "rm -rf .archery && swift package clean",
