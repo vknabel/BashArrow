@@ -13,7 +13,7 @@ public struct BashArrow: Arrow {
         let process = Process()
         process.launchPath = launchPath
         process.currentDirectoryPath = targetWorkingDirectory
-        let commandWithEscapedArguments = "\u{001B}[36m"+command+"\u{001B}[0m" + " with arguments " + "\u{001B}[96m" + escaped(arguments) + "\u{001B}[0m"
+        let commandWithEscapedArguments = "\u{001B}[36m" + command + "\u{001B}[0m" + " with arguments " + "\u{001B}[96m" + escaped(arguments) + "\u{001B}[0m"
         if printCommandBeforeExecution ?? false {
             print("🏹  \(workingDirectoryHint) $ \(commandWithEscapedArguments)")
         }

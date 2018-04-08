@@ -1,7 +1,7 @@
-import XCTest
 import ArrowKit
-import Foundation
 @testable import BashArrowKit
+import Foundation
+import XCTest
 
 func archerfile(_ contents: [String: Any]) throws -> Archerfile {
     let stringified = try JSONSerialization.data(withJSONObject: contents)
@@ -56,5 +56,4 @@ extension XCTestCase {
             XCTAssertNoThrow(try { throw error }())
         }
     }
-
 }
