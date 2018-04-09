@@ -39,8 +39,8 @@ extension XCTestCase {
         ))
 
         do {
-            let currentSnapshot = try String(contentsOfFile: currentSnapshotPath)
-            let pinnedSnapshot = try? String(contentsOfFile: pinnedSnapshotPath)
+            let currentSnapshot = try contents(atPath: currentSnapshotPath)
+            let pinnedSnapshot = try? contents(atPath: pinnedSnapshotPath)
             if let pinnedSnapshot = pinnedSnapshot {
                 XCTAssertEqual(currentSnapshot, pinnedSnapshot, "Snapshot mismatch")
             } else {
@@ -56,4 +56,13 @@ extension XCTestCase {
             XCTAssertNoThrow(try { throw error }())
         }
     }
+}
+
+fileprivate func contents(atPath path: String) throws -> String {
+    #if !swift(>=4.1) && os(Linux)
+    let contents = try FileManager.default.contents(atPath: path)
+    return try String(data: contents, encoding: .utf8)
+    #else
+    return try String(contentsOfFile: path)
+    #endif
 }
