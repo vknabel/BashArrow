@@ -2,7 +2,7 @@ name: Bash Arrow
 github: vknabel/BashArrow
 archery:
   github: vknabel/Archery
-version: 0.1.0
+version: 0.2.0
 apiLevel: 1
 repository: https://github.com/vknabel/BashArrow
 contributors:
@@ -46,7 +46,7 @@ scripts:
       Reformats all Swift code. Requires swiftformat to be installed globally.
       See https://github.com/nicklockwood/SwiftFormat/pull/183
     comment: Requires https://github.com/nicklockwood/SwiftFormat/pull/183
-    command: swiftformat .
+    command: swiftformat Sources && swiftformat Tests
   generate:
     arrow: vknabel/ArcheryArrow
     run:
@@ -77,7 +77,11 @@ scripts:
         arrow: vknabel/BashArrow
         command: |-
           if which jazzy >/dev/null; then
-            jazzy
+            sourcekitten doc --spm-module BashArrowKit > .build/jazzy.json
+            jazzy --clean \
+              --sourcekitten-sourcefile .build/jazzy.json \
+              --author vknabel \
+              --module BashArrowKit
           else
             echo 'Skip: Jazzy not available'
           fi

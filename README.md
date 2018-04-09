@@ -5,17 +5,13 @@ Run bash scripts out of your Archerfile.
 For more information about Archery itself head to [vknabel/Archery](https://github.com/vknabel/Archery).
 
 
-```json
-{
-    "name": "SupercoolProject",
-    "version": "1.0.0",
-    "scripts": {
-        "greet": {
-            "arrow": "vknabel/BashArrow",
-            "command": "echo Hello"
-        }
-    }
-}
+```yaml
+name: SupercoolProject
+version: 1.0.0
+scripts:
+  greet:
+    arrow: vknabel/BashArrow
+    command: echo Hello $@
 ```
 
 All parameters will be passed to your script.
