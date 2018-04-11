@@ -5,17 +5,13 @@ Run bash scripts out of your Archerfile.
 {% endblock %}
 
 {% block example %}
-```json
-{
-    "name": "SupercoolProject",
-    "version": "1.0.0",
-    "scripts": {
-        "greet": {
-            "arrow": "{{github}}",
-            "command": "echo Hello"
-        }
-    }
-}
+```yaml
+name: SupercoolProject
+version: 1.0.0
+scripts:
+  greet:
+    arrow: {{github}}
+    command: echo Hello $@
 ```
 
 All parameters will be passed to your script.

@@ -1,72 +1,87 @@
-{
-    "name": "Bash Arrow",
-    "github": "vknabel/BashArrow",
-    "archery": {
-        "github": "vknabel/Archery"
-    },
-    "version": "0.1.0",
-    "apiLevel": 1,
-    "repository": "https://github.com/vknabel/BashArrow",
-    "contributors": [
-        {
-            "github": "vknabel",
-            "email": "dev@vknabel.com",
-            "name": "Valentin Knabel",
-            "twitter": "vknabel"
-        }
-    ],
-    "arrowOptions": [
-        {
-            "name": "command",
-            "type": "String",
-            "default": "Required"
-        },
-        {
-            "name": "printCommandBeforeExecution",
-            "type": "Bool?",
-            "default": "`true`"
-        },
-        {
-            "name": "workingDirectory",
-            "type": "String?",
-            "default": "current directory"
-        }
-    ],
-    "scripts": {
-        "clean": {
-            "arrow": "vknabel/BashArrow",
-            "command": "rm -rf .archery && swift package clean",
-            "printCommandBeforeExecution": true
-        },
-        "xcopen": {
-            "arrow": "vknabel/BashArrow",
-            "command": "swift package generate-xcodeproj && open *.xcodeproj"
-        },
-        "format": {
-            "arrow": "vknabel/BashArrow",
-            "help": "Reformats all Swift code. Requires swiftformat to be installed globally.\nSee https://github.com/nicklockwood/SwiftFormat/pull/183",
-            "comment": "Requires https://github.com/nicklockwood/SwiftFormat/pull/183",
-            "command": "swiftformat ."
-        },
-        "generate": {
-            "arrow": "vknabel/ArcheryArrow",
-            "run": [
-                "readme",
-                "format",
-                "docs"
-            ],
-            "scripts": {
-                "readme": {
-                    "arrow": "vknabel/StencilArrow",
-                    "template": "README.md.stencil",
-                    "destination": "README.md",
-                    "searchPaths": ["Scripts"]
-                },
-                "docs": {
-                    "arrow": "vknabel/BashArrow",
-                    "command": "if which jazzy >/dev/null; then jazzy; else echo Skip: Jazzy not available; fi"
-                }
-            }
-        }
-    }
-}
+name: Bash Arrow
+github: vknabel/BashArrow
+archery:
+  github: vknabel/Archery
+version: 0.2.0
+apiLevel: 1
+repository: https://github.com/vknabel/BashArrow
+contributors:
+- github: vknabel
+  email: dev@vknabel.com
+  name: Valentin Knabel
+  twitter: vknabel
+arrowOptions:
+- name: command
+  type: String
+  default: Required
+- name: printCommandBeforeExecution
+  type: Bool?
+  default: "`true`"
+- name: workingDirectory
+  type: String?
+  default: current directory
+scripts:
+  test:
+    arrow: vknabel/BashArrow
+    command: swift test
+  test-approve:
+    arrow: vknabel/ArcheryArrow
+    run:
+    - test-clear
+    - test
+    scripts:
+      test-clear:
+        arrow: vknabel/BashArrow
+        command: rm -rf Tests/**/snapshots
+  clean:
+    arrow: vknabel/BashArrow
+    command: rm -rf .archery && swift package clean
+    printCommandBeforeExecution: true
+  xcopen:
+    arrow: vknabel/BashArrow
+    command: swift package generate-xcodeproj && open *.xcodeproj
+  format:
+    arrow: vknabel/BashArrow
+    help: |-
+      Reformats all Swift code. Requires swiftformat to be installed globally.
+      See https://github.com/nicklockwood/SwiftFormat/pull/183
+    comment: Requires https://github.com/nicklockwood/SwiftFormat/pull/183
+    command: swiftformat Sources && swiftformat Tests
+  generate:
+    arrow: vknabel/ArcheryArrow
+    run:
+    - readme
+    - linux-main
+    - format
+    - docs
+    scripts:
+      linux-main:
+        arrow: vknabel/MintArrow
+        package: krzysztofzablocki/Sourcery
+        packageVersion: 0.10.1
+        arguments:
+        - "--sources"
+        - Tests/
+        - "--templates"
+        - Scripts/LinuxMain.swift.stencil
+        - "--args"
+        - |-
+          testimports='@testable import BashArrowKitTests'
+      readme:
+        arrow: vknabel/StencilArrow
+        template: README.md.stencil
+        destination: README.md
+        searchPaths:
+        - Scripts
+      docs:
+        arrow: vknabel/BashArrow
+        command: |-
+          if which jazzy >/dev/null; then
+            sourcekitten doc --spm-module BashArrowKit > .build/jazzy.json
+            jazzy --clean \
+              --sourcekitten-sourcefile .build/jazzy.json \
+              --author vknabel \
+              --module BashArrowKit
+          else
+            echo 'Skip: Jazzy not available'
+          fi

@@ -6,3 +6,5 @@
 /.archery
 /.vscode
 /build
+/Tests/**/snapshots/*.out
+/docs/**/undocumented.json
