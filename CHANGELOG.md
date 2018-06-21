@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+* Rely on [jakeheis/SwiftCLI](https://github.com/jakeheis/SwiftCLI) in order to pass interrupts correctly
+
 ## 0.2.0
 
 * **[Breaking]** Arguments will not be appended anymore, but instead passed as Bash argument

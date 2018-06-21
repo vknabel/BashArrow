@@ -2,7 +2,7 @@ name: Bash Arrow
 github: vknabel/BashArrow
 archery:
   github: vknabel/Archery
-version: 0.2.0
+version: 0.2.1
 apiLevel: 1
 repository: https://github.com/vknabel/BashArrow
 contributors:
