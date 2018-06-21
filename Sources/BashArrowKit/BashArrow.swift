@@ -1,5 +1,6 @@
 import ArrowKit
 import Foundation
+import SwiftCLI
 
 /// Runs bash scripts out of your Archerfile.
 public struct BashArrow: Arrow {
@@ -19,21 +20,21 @@ public struct BashArrow: Arrow {
     /// Run the bash arrow against given arguments and a given archerfile.
     public func fire(archerfile _: Archerfile, arguments: [String]) throws {
         let launchPath = "/usr/bin/env"
-        let process = Process()
-        process.launchPath = launchPath
-        process.currentDirectoryPath = targetWorkingDirectory
         let commandWithEscapedArguments = "\u{001B}[36m" + command + "\u{001B}[0m" + " with arguments " + "\u{001B}[96m" + escaped(arguments) + "\u{001B}[0m"
         if printCommandBeforeExecution ?? false {
             print("🏹  \(workingDirectoryHint) $ \(commandWithEscapedArguments)")
         }
-        process.arguments = ["bash", "-c", command, targetWorkingDirectory] + arguments
-        process.launch()
-        process.waitUntilExit()
-        if process.terminationStatus != 0 {
+        let process = Task(
+            executable: launchPath,
+            arguments: ["bash", "-c", command, targetWorkingDirectory] + arguments,
+            directory: targetWorkingDirectory
+        )
+        let status = process.runSync()
+        if status != 0 {
             if !(printCommandBeforeExecution ?? false) {
                 print("🏹  \(workingDirectoryHint) $ \(commandWithEscapedArguments)")
             }
-            throw NSError(domain: "BashArrow", code: Int(process.terminationStatus))
+            throw NSError(domain: "BashArrow", code: Int(status))
         }
     }
 

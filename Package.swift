@@ -7,10 +7,11 @@ let package = Package(
     name: "BashArrow",
     dependencies: [
         .package(url: "https://github.com/vknabel/ArrowKit.git", from: "0.2.1"),
+        .package(url: "https://github.com/jakeheis/SwiftCLI", from: "5.1.2"),
     ],
     targets: [
         .target(name: "BashArrow", dependencies: ["BashArrowKit"]),
-        .target(name: "BashArrowKit", dependencies: ["ArrowKit"]),
-        .testTarget(name: "BashArrowKitTests", dependencies: ["BashArrowKit"]),
+        .target(name: "BashArrowKit", dependencies: ["ArrowKit", "SwiftCLI"]),
+        .testTarget(name: "BashArrowKitTests", dependencies: ["BashArrowKit", "SwiftCLI"]),
     ]
 )
