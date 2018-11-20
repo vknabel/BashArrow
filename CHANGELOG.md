@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+
+* Missing SwiftPM product
+
 ## 0.2.1
 
 * Rely on [jakeheis/SwiftCLI](https://github.com/jakeheis/SwiftCLI) in order to pass interrupts correctly

@@ -2,24 +2,24 @@ name: Bash Arrow
 github: vknabel/BashArrow
 archery:
   github: vknabel/Archery
-version: 0.2.1
+version: 0.2.2
 apiLevel: 1
 repository: https://github.com/vknabel/BashArrow
 contributors:
-- github: vknabel
-  email: dev@vknabel.com
-  name: Valentin Knabel
-  twitter: vknabel
+  - github: vknabel
+    email: dev@vknabel.com
+    name: Valentin Knabel
+    twitter: vknabel
 arrowOptions:
-- name: command
-  type: String
-  default: Required
-- name: printCommandBeforeExecution
-  type: Bool?
-  default: "`true`"
-- name: workingDirectory
-  type: String?
-  default: current directory
+  - name: command
+    type: String
+    default: Required
+  - name: printCommandBeforeExecution
+    type: Bool?
+    default: "`true`"
+  - name: workingDirectory
+    type: String?
+    default: current directory
 scripts:
   test:
     arrow: vknabel/BashArrow
@@ -27,8 +27,8 @@ scripts:
   test-approve:
     arrow: vknabel/ArcheryArrow
     run:
-    - test-clear
-    - test
+      - test-clear
+      - test
     scripts:
       test-clear:
         arrow: vknabel/BashArrow
@@ -50,29 +50,29 @@ scripts:
   generate:
     arrow: vknabel/ArcheryArrow
     run:
-    - readme
-    - linux-main
-    - format
-    - docs
+      - readme
+      - linux-main
+      - format
+      - docs
     scripts:
       linux-main:
         arrow: vknabel/MintArrow
         package: krzysztofzablocki/Sourcery
         packageVersion: 0.10.1
         arguments:
-        - "--sources"
-        - Tests/
-        - "--templates"
-        - Scripts/LinuxMain.swift.stencil
-        - "--args"
-        - |-
-          testimports='@testable import BashArrowKitTests'
+          - "--sources"
+          - Tests/
+          - "--templates"
+          - Scripts/LinuxMain.swift.stencil
+          - "--args"
+          - |-
+            testimports='@testable import BashArrowKitTests'
       readme:
         arrow: vknabel/StencilArrow
         template: README.md.stencil
         destination: README.md
         searchPaths:
-        - Scripts
+          - Scripts
       docs:
         arrow: vknabel/BashArrow
         command: |-
