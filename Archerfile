@@ -2,7 +2,7 @@ name: Bash Arrow
 github: vknabel/BashArrow
 archery:
   github: vknabel/Archery
-version: 0.2.2
+version: 0.2.3
 apiLevel: 1
 repository: https://github.com/vknabel/BashArrow
 contributors:
@@ -23,7 +23,7 @@ arrowOptions:
 scripts:
   test:
     arrow: vknabel/BashArrow
-    command: swift test
+    command: swift test --enable-test-discovery
   test-approve:
     arrow: vknabel/ArcheryArrow
     run:
@@ -51,22 +51,9 @@ scripts:
     arrow: vknabel/ArcheryArrow
     run:
       - readme
-      - linux-main
       - format
       - docs
     scripts:
-      linux-main:
-        arrow: vknabel/MintArrow
-        package: krzysztofzablocki/Sourcery
-        packageVersion: 0.10.1
-        arguments:
-          - "--sources"
-          - Tests/
-          - "--templates"
-          - Scripts/LinuxMain.swift.stencil
-          - "--args"
-          - |-
-            testimports='@testable import BashArrowKitTests'
       readme:
         arrow: vknabel/StencilArrow
         template: README.md.stencil

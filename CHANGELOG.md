@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.3
+
+* Bumped dependencies
+
 ## 0.2.2
 
 * Missing SwiftPM product

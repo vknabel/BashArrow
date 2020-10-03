@@ -58,11 +58,12 @@ extension XCTestCase {
     }
 }
 
-fileprivate func contents(atPath path: String) throws -> String {
+private func contents(atPath path: String) throws -> String {
     #if !swift(>=4.1) && os(Linux)
         struct FileNotFoundOrInvalid: Error {}
         guard let contents = FileManager.default.contents(atPath: path),
-            let result = String(data: contents, encoding: .utf8) else {
+            let result = String(data: contents, encoding: .utf8)
+        else {
             throw FileNotFoundOrInvalid()
         }
         return result
